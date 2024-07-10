@@ -1,4 +1,4 @@
-name: cv
+name: material
 channels:
   - pytorch
   - conda-forge
@@ -7,7 +7,6 @@ dependencies:
   - cudatoolkit=11.1.1
   - numpy=1.22.3
   - pandas=1.4.2
-  - pillow=7.1.2
   - python=3.8.13
   - pytorch=1.8.1
   - scipy=1.7.3
@@ -17,4 +16,4 @@ dependencies:
     - pytorch-lightning==1.2.3
     - segmentation-models-pytorch==0.2.0
     - timm==0.4.12
-prefix: /home/usrname/miniconda3/envs/cv
+    - pillow==7.1.2

@@ -46,7 +46,7 @@ def segment2rgb(output, mask=False, ops=False):
     if ops:
         pass
     else:
-        color_plate = {0: [119, 17, 17], 1: [202, 198, 144], 2: [186, 200, 238], 3: [124, 143, 166], 4: [89, 125, 49],
+        color_plate = {0: [119, 17, 17], 1: [202, 198, 144], 2: [186, 200, 238], 3: [0, 0, 200], 4: [89, 125, 49],
                    5: [16, 68, 16], 6: [187, 129, 156], 7: [208, 206, 72], 8: [98, 39, 69], 9: [102, 102, 102],
                    10: [76, 74, 95], 11: [16, 16, 68], 12: [68, 65, 38], 13: [117, 214, 70], 14: [221, 67, 72],
                    15: [92, 133, 119]}
@@ -59,6 +59,41 @@ def segment2rgb(output, mask=False, ops=False):
 
     return rgbmask
 
+# from PIL import ImageDraw, ImageFont
+# from scipy.ndimage import label
+
+# def segment2rgb(output, mask=False, ops=False):
+#     if ops:
+#         pass
+#     else:
+#         color_plate = {0: [119, 17, 17], 1: [202, 198, 144], 2: [186, 200, 238], 3: [0, 0, 200], 4: [89, 125, 49],
+#                    5: [16, 68, 16], 6: [187, 129, 156], 7: [208, 206, 72], 8: [98, 39, 69], 9: [102, 102, 102],
+#                    10: [76, 74, 95], 11: [16, 16, 68], 12: [68, 65, 38], 13: [117, 214, 70], 14: [221, 67, 72],
+#                    15: [92, 133, 119]}
+#         material_names = {0: 'Asphalt', 1: 'Ceramic', 2: 'Concrete', 3: 'Fabric', 4: 'Foliage', 5: 'Food',
+#                           6: 'Glass', 7: 'Metal', 8: 'Paper', 9: 'Plaster', 10: 'Plastic', 11: 'Rubber',
+#                           12: 'Soil', 13: 'Stone', 14: 'Water', 15: 'Wood'}
+#     if not mask:
+#         output = output.argmax(dim=1)
+#     output = output.squeeze().cpu()
+#     rgbmask = np.zeros([output.size()[0], output.size()[1], 3], dtype=np.uint8)
+#     for i in np.unique(output):
+#         rgbmask[output == i] = color_plate[i]
+#         # Convert numpy array to PIL Image
+#         rgbmask_pil = Image.fromarray(rgbmask)
+#         draw = ImageDraw.Draw(rgbmask_pil)
+#         # Use a truetype font
+#         font = ImageFont.truetype("arial.ttf", 15)
+#         # Find the center of the bounding box of the mask
+#         where = np.array(np.where(output == i))
+#         if where.shape[1] > 4000:  
+#             print(f"Material: {material_names[i]}")  # Print the material name
+#             center = where.mean(axis=1)
+#             draw.text(tuple(center), f"{material_names[i]}", font=font)
+#         # Convert PIL Image back to numpy array
+#         rgbmask = np.array(rgbmask_pil)
+
+#     return rgbmask
 
 def resize_img_tensors(merged_tensors, segments_tensor):
     assert len(merged_tensors) == len(segments_tensor), "number of images does not match with segments"
