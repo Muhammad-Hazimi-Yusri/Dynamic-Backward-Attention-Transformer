@@ -93,7 +93,7 @@ def cubemap_to_omnidirectional(cube_faces, out_width, out_height):
 if __name__ == "__main__":
     # Load the cubemap images
     #cube_faces_dir = input("Enter the directory containing the cubemap images: ").strip()
-    cube_faces_dir = "C:\Project\AV-VR-Internship\material_recognition\Dynamic-Backward-Attention-Transformer\output\split_output"
+    cube_faces_dir = "C:\Project\AVVR-Pipeline-Internship\material_recognition\Dynamic-Backward-Attention-Transformer\output\split_output"
 
     #faces = ["right", "left", "top", "bottom", "front", "back"]
     faces = ["rightrgb", "leftrgb", "toprgb", "bottomrgb", "frontrgb", "backrgb"]
@@ -136,6 +136,6 @@ if __name__ == "__main__":
     #print(f"height: {height}, width: {width}")
     omnidirectional_img = cubemap_to_omnidirectional(cube_faces, output_width, output_height)
     
-    output_path = "C:\Project\AV-VR-Internship\edgenet360\Data\Input\material.png"
+    output_path = "C:\Project\AVVR-Pipeline-Internship\edgenet360\Data\Input\material.png"
     imageio.v2.imsave(output_path, omnidirectional_img)
     print(f"Omnidirectional image saved to {output_path}")

@@ -16,7 +16,7 @@ def select_image():
 def get_res(path):
     img = cv2.imread(path)
     height, width, _ = img.shape
-    cv2.imwrite('C:\Project\AV-VR-Internship\edgenet360\Data\Input\\rgb.png', img)
+    cv2.imwrite('C:\Project\AVVR-Pipeline-Internship\edgenet360\Data\Input\\rgb.png', img)
 
     return height, width
 

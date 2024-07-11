@@ -76,7 +76,7 @@ def generate_cube_faces(input_path, output_path="cube_faces_output"):
 #     print("width: , Height:", width, height)
 #     #output_path = input("Enter output directory: ").strip()
 #     #if not output_path:
-#     output_path = "C:\Project\AV-VR-Internship\material_recognition\Dynamic-Backward-Attention-Transformer\split_output"
+#     output_path = "C:\Project\AVVR-Pipeline-Internship\material_recognition\Dynamic-Backward-Attention-Transformer\split_output"
 #     if not os.path.exists(output_path):
 #         os.makedirs(output_path)
 #     generate_cube_faces(input_path, output_path)
@@ -90,7 +90,7 @@ with open('path.txt', 'w') as file:
 
 #output_path = input("Enter output directory: ").strip()
 #if not output_path:
-output_path = "C:\Project\AV-VR-Internship\material_recognition\Dynamic-Backward-Attention-Transformer\split_output"
+output_path = "C:\Project\AVVR-Pipeline-Internship\material_recognition\Dynamic-Backward-Attention-Transformer\split_output"
 if not os.path.exists(output_path):
     os.makedirs(output_path)
 generate_cube_faces(input_path, output_path)
