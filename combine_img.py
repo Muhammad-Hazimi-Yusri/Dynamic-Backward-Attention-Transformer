@@ -91,11 +91,12 @@ def cubemap_to_omnidirectional(cube_faces, out_width, out_height):
 
 
 if __name__ == "__main__":
-    # Load the cubemap images
-    #cube_faces_dir = input("Enter the directory containing the cubemap images: ").strip()
-    cube_faces_dir = "C:\Project\AVVR-Pipeline-Internship\material_recognition\Dynamic-Backward-Attention-Transformer\output\split_output"
+    # Get the current directory
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Construct the cube faces directory path
+    cube_faces_dir = os.path.join(current_dir, 'output', 'split_output')
 
-    #faces = ["right", "left", "top", "bottom", "front", "back"]
     faces = ["rightrgb", "leftrgb", "toprgb", "bottomrgb", "frontrgb", "backrgb"]
     cube_faces = {}
     
@@ -103,39 +104,30 @@ if __name__ == "__main__":
         image_path = os.path.join(cube_faces_dir, f"{face}.png")
         image_data = imageio.imread(image_path)
         
-        #rotate top and bottom face by 90 deg
-        # if face in ["top", "bottom"]:
-        #     image_data = np.rot90(image_data, 1)
-        
-        # #flip the top, bottom, front and back faces in horizontal direction
-        # if face not in ["left", "right"]:
-        #     image_data = image_data[:, ::-1]
-
         if face in ["toprgb", "bottomrgb"]:
             image_data = np.rot90(image_data, 1)
         
         if face not in ["leftrgb", "rightrgb"]:
             image_data = image_data[:, ::-1]
         
-        
         cube_faces[face] = image_data
 
+    # Read the input path from the file
+    path_file = os.path.join(current_dir, 'path.txt')
+    with open(path_file, 'r') as file:
+        input_path = file.readline().strip()
+    os.remove(path_file)
     
-    # output_width = int(input("Enter output omnidirectional width: "))
-    # output_height = int(input("Enter output omnidirectional height: "))
-    with open('path.txt', 'r') as file:
-        input_path = file.readline()
-        print(f'path = {input_path}')
-    os.remove('path.txt')
     height, width = get_res(input_path)
     print(height, width)
     
     output_width = width
     output_height = height
 
-    #print(f"height: {height}, width: {width}")
     omnidirectional_img = cubemap_to_omnidirectional(cube_faces, output_width, output_height)
     
-    output_path = "C:\Project\AVVR-Pipeline-Internship\edgenet360\Data\Input\material.png"
+    # Construct the output path
+    output_path = os.path.join(current_dir, '..', '..', 'edgenet360', 'Data', 'Input', 'material.png')
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     imageio.v2.imsave(output_path, omnidirectional_img)
     print(f"Omnidirectional image saved to {output_path}")

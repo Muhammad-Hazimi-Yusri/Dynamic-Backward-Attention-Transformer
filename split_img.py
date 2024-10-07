@@ -67,37 +67,23 @@ def generate_cube_faces(input_path, output_path="cube_faces_output"):
         imageio.imsave(face_output_path, results[face])
         print(f"Saved {face} face to {face_output_path}")
     
+if __name__ == "__main__":
+    input_path = sys.argv[1]
     
-
-
-# if __name__ == "__main__":
-#     input_path = select_image()
-#     height, width = get_res(input_path)
-#     print("width: , Height:", width, height)
-#     #output_path = input("Enter output directory: ").strip()
-#     #if not output_path:
-#     output_path = "C:\Project\AVVR-Pipeline-Internship\material_recognition\Dynamic-Backward-Attention-Transformer\split_output"
-#     if not os.path.exists(output_path):
-#         os.makedirs(output_path)
-#     generate_cube_faces(input_path, output_path)
-        
-
-#input_path = select_image()
-input_path = sys.argv[1]
-with open('path.txt', 'w') as file:
-    file.write(input_path)
-    file.close()
-
-#output_path = input("Enter output directory: ").strip()
-#if not output_path:
-output_path = "C:\Project\AVVR-Pipeline-Internship\material_recognition\Dynamic-Backward-Attention-Transformer\split_output"
-if not os.path.exists(output_path):
-    os.makedirs(output_path)
-generate_cube_faces(input_path, output_path)
-
-
-
-
+    # Get the current directory
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Write input path to a file
+    path_file = os.path.join(current_dir, 'path.txt')
+    with open(path_file, 'w') as file:
+        file.write(input_path)
+    
+    # Construct the output path
+    output_path = os.path.join(current_dir, 'split_output')
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+    
+    generate_cube_faces(input_path, output_path)
 
 
 

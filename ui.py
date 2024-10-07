@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import filedialog
 import cv2
+import os
 
 def select_image():
-    
     root = tk.Tk()
     root.withdraw() 
     
@@ -12,11 +12,21 @@ def select_image():
     print(f"Selected file: {filename}")
     return filename
 
-#function to retrieve image resolution
 def get_res(path):
     img = cv2.imread(path)
     height, width, _ = img.shape
-    cv2.imwrite('C:\Project\AVVR-Pipeline-Internship\edgenet360\Data\Input\\rgb.png', img)
+    
+    # Get the directory two levels up from the current script
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    base_dir = os.path.dirname(os.path.dirname(current_dir))
+    
+    # Construct the output path dynamically
+    output_path = os.path.join(base_dir, 'edgenet360', 'Data', 'Input', 'rgb.png')
+    
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    
+    cv2.imwrite(output_path, img)
 
     return height, width
 
